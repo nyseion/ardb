@@ -34,6 +34,12 @@
 CXX=g++
 CC=gcc
 
+ifdef CXX
+	GCC_VERSION = $(shell $(CXX) -dumpversion)                                                                                               
+else
+	GCC_VERSION = $(shell g++ -dumpversion)
+endif
+
 ARDB_VERSION=0.10.0
 
 uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
@@ -166,9 +172,11 @@ ifeq ($(uname_S),Linux)
 	CXXFLAGS+=-DCORO_ASM
 	CCFLAGS+=-DCORO_ASM
 	LIBS+=-lrt
-	CXXFLAGS+=-Wno-error=stringop-truncation
-	CXXFLAGS+=-Wno-error=class-memaccess
-   	CXXFLAGS+=-Wno-error=format-truncation
+	ifeq ($(shell expr $(GCC_VERSION) '>=' 9), 1)
+		CXXFLAGS+=-Wno-error=stringop-truncation
+		CXXFLAGS+=-Wno-error=class-memaccess
+   		CXXFLAGS+=-Wno-error=format-truncation
+	endif
 else
 	MALLOC=libc
 	CXXFLAGS+=-DCORO_UCONTEXT -D_XOPEN_SOURCE
