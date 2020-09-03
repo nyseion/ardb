@@ -52,7 +52,7 @@ SNAPPY_FILE=${SNAPPY_PATH}.tar.gz
 SNAPPY_REMOTE_FILE=https://github.com/google/snappy/releases/download/${SNAPPY_VER}/snappy-${SNAPPY_VER}.tar.gz
 SNAPPY_LIBA=${SNAPPY_PATH}/.libs/libsnappy.a
 
-ROCKSDB_VER=5.14.2
+ROCKSDB_VER=6.8.1
 ROCKSDB_PATH=${LIB_PATH}/rocksdb-${ROCKSDB_VER}
 ROCKSDB_REMOTE_FILE=https://github.com/facebook/rocksdb/archive/v${ROCKSDB_VER}.tar.gz
 ROCKSDB_FILE=${ROCKSDB_PATH}.tar.gz
@@ -166,7 +166,9 @@ ifeq ($(uname_S),Linux)
 	CXXFLAGS+=-DCORO_ASM
 	CCFLAGS+=-DCORO_ASM
 	LIBS+=-lrt
-	CXXFLAGS+=-Werror
+	CXXFLAGS+=-Wno-error=stringop-truncation
+	CXXFLAGS+=-Wno-error=class-memaccess
+   	CXXFLAGS+=-Wno-error=format-truncation
 else
 	MALLOC=libc
 	CXXFLAGS+=-DCORO_UCONTEXT -D_XOPEN_SOURCE
