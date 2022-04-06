@@ -46,7 +46,7 @@ uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
 
 LIB_PATH=$(PWD)/../deps
 
-JEMALLOC_VER=5.1.0
+JEMALLOC_VER=5.2.1
 JEMALLOC_PATH=${LIB_PATH}/jemalloc-${JEMALLOC_VER}
 JEMALLOC_FILE=${JEMALLOC_PATH}.tar.bz2
 JEMALLOC_REMOTE_FILE=https://github.com/jemalloc/jemalloc/releases/download/${JEMALLOC_VER}/jemalloc-${JEMALLOC_VER}.tar.bz2
@@ -102,7 +102,7 @@ ZOOKEEPER_FILE=${ZOOKEEPER_PATH}.tar.gz
 ZOOKEEPER_LIBA=${ZOOKEEPER_PATH}/.libs/libzkst.a
 ZOOKEEPER_LIBHTA=${ZOOKEEPER_PATH}/.libs/libhashtable.a
 
-SPARSEHASH_VER=sparsehash-sparsehash-2.0.3
+SPARSEHASH_VER=sparsehash-sparsehash-2.0.4
 SPARSEHASH_PATH=${LIB_PATH}/${SPARSEHASH_VER}
 SPARSEHASH_FILE=${SPARSEHASH_PATH}.tar.gz
 SPARSEHASH_CONFIG=${SPARSEHASH_PATH}/src/config.h
