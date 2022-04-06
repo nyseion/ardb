@@ -41,7 +41,7 @@
 #include "rocksdb/filter_policy.h"
 #include "rocksdb/statistics.h"
 #include "rocksdb/merge_operator.h"
-#include "rocksdb/utilities/backupable_db.h"
+#include "rocksdb/utilities/backup_engine.h"
 #include "db/engine.hpp"
 #include <vector>
 #include <sparsehash/dense_hash_map>

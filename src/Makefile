@@ -58,7 +58,7 @@ SNAPPY_FILE=${SNAPPY_PATH}.tar.gz
 SNAPPY_REMOTE_FILE=https://github.com/google/snappy/releases/download/${SNAPPY_VER}/snappy-${SNAPPY_VER}.tar.gz
 SNAPPY_LIBA=${SNAPPY_PATH}/.libs/libsnappy.a
 
-ROCKSDB_VER=6.8.1
+ROCKSDB_VER=7.0.4
 ROCKSDB_PATH=${LIB_PATH}/rocksdb-${ROCKSDB_VER}
 ROCKSDB_REMOTE_FILE=https://github.com/facebook/rocksdb/archive/v${ROCKSDB_VER}.tar.gz
 ROCKSDB_FILE=${ROCKSDB_PATH}.tar.gz
@@ -256,7 +256,7 @@ ifeq ($(storage_engine), rocksdb)
   STORAGE_ENGINE_PATH=$(ROCKSDB_PATH)
   INCS+=-I${ROCKSDB_PATH}/include -I${ROCKSDB_PATH}
   LIBS:= ${ROCKSDB_LIBA} ${SNAPPY_LIBA} ${LIBS}
-  CXXFLAGS+=-D__USE_ROCKSDB__ -std=c++11
+  CXXFLAGS+=-D__USE_ROCKSDB__ -std=c++17
 else
 ifeq ($(storage_engine), wiredtiger)
   STORAGE_ENGINE=$(WIREDTIGER_LIBA)

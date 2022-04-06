@@ -653,7 +653,7 @@ OP_NAMESPACE_BEGIN
     int RocksDBEngine::Backup(Context& ctx, const std::string& dir)
     {
         LockGuard<ThreadMutex> guard(m_backup_lock);
-        rocksdb::BackupableDBOptions opt(dir);
+        rocksdb::BackupEngineOptions opt(dir);
         rocksdb::BackupEngine* backup_engine = NULL;
         rocksdb::Status s = rocksdb::BackupEngine::Open(rocksdb::Env::Default(), opt, &backup_engine);
         if (s.ok())
@@ -678,7 +678,7 @@ OP_NAMESPACE_BEGIN
         m_bulk_loading = true;
         Close();
         rocksdb::BackupEngineReadOnly* backup_engine = NULL;
-        rocksdb::BackupableDBOptions opt(dir);
+        rocksdb::BackupEngineOptions opt(dir);
         rocksdb::Status s = rocksdb::BackupEngineReadOnly::Open(rocksdb::Env::Default(), opt, &backup_engine);
         if (s.ok())
         {
@@ -1324,7 +1324,7 @@ OP_NAMESPACE_BEGIN
         rocksdb::TableFactory* table_factory = m_options.table_factory.get();
         if (NULL != table_factory && !strcmp("BlockBasedTable", table_factory->Name()))
         {
-            void* table_opt = table_factory->GetOptions();
+            void* table_opt = table_factory;
             if(NULL != table_opt)
             {
                 rocksdb::BlockBasedTableOptions* topt = (rocksdb::BlockBasedTableOptions*)table_opt;
